@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # This script is displaying "Best School" 10 times
 count=0
-while [ "$count" -lt 11 ]
+while [ "$count" -le 10 ]
 do
 if [ "$count" -eq 9 ]
 then
-echo "hi"
+echo "Hi"
 else
 echo "Best School"
 fi
