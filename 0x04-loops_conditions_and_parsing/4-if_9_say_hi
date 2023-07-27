@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script is displaying "Best School" 10 times
-count=1
-while [ "$count" -le 10 ]
+count=0
+while [ "$count" -lt 11 ]
 do
 if [ "$count" -eq 9 ]
 then
@@ -9,5 +9,5 @@ echo "hi"
 else
 echo "Best School"
 fi
-((count++))
+count=$(( count + 1 ))
 done
