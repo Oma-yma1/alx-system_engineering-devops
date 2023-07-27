@@ -1,0 +1,31 @@
+Script started on 2023-07-27 11:04:08-07:00 [TERM="xterm" TTY="/dev/pts/1" COLUMNS="66" LINES="38"]
+# 0
+sh: 1: 0: not found
+# daemon
+sh: 2: daemon: not found
+# /etc/passxd
+sh: 3: /etc/passxd: not found
+# /etc/passwd
+/etc/passwd: 1: root:x:0:0:root:/root:/bin/bash: not found
+/etc/passwd: 2: daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin: not found
+/etc/passwd: 3: bin:x:2:2:bin:/bin:/usr/sbin/nologin: not found
+/etc/passwd: 4: sys:x:3:3:sys:/dev:/usr/sbin/nologin: not found
+/etc/passwd: 5: sync:x:4:65534:sync:/bin:/bin/sync: not found
+/etc/passwd: 6: games:x:5:60:games:/usr/games:/usr/sbin/nologin: not found
+/etc/passwd: 7: man:x:6:12:man:/var/cache/man:/usr/sbin/nologin: not found
+/etc/passwd: 8: lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin: not found
+/etc/passwd: 9: mail:x:8:8:mail:/var/mail:/usr/sbin/nologin: not found
+/etc/passwd: 10: news:x:9:9:news:/var/spool/news:/usr/sbin/nologin: not found
+/etc/passwd: 11: uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin: not found
+/etc/passwd: 12: proxy:x:13:13:proxy:/bin:/usr/sbin/nologin: not found
+/etc/passwd: 13: www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin: not found
+/etc/passwd: 14: backup:x:34:34:backup:/var/backups:/usr/sbin/nologin: not found
+/etc/passwd: 15: list:x:38:38:Mailing: not found
+/etc/passwd: 16: irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin: not found
+/etc/passwd: 17: Syntax error: "(" unexpected
+# clear
+[H[2J[3J# ^[[A^[[A        f1
+sh: 6: f1: not found
+# exit
+
+Script done on 2023-07-27 11:05:59-07:00 [COMMAND_EXIT_CODE="127"]
