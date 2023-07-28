@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Write a manage_my_process Bash script
+while true
+do
+sudo bash -c 'echo "I am alive!" >> /tmp/my_process
+sleep 2
+done
