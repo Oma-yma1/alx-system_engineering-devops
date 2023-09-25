@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#Redirection
+sudo apt-get -y update
+sudo apt-get -y install ngnix
+sudo ufw allow 'Ngnix HTTP'
+echo 'Hello World!' > sudo /var/www/html/index.ngnix-debian.html
+sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.comwatch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+sudo service nginx start
