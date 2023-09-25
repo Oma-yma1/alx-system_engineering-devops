@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #install Nginx web server (w/ Puppet)
 exec { 'apt-get-update':
   command => '/usr/bin/apt-get update',
