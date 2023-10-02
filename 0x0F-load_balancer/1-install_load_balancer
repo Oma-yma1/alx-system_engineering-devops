@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install your load balancer
+# Instal load balancer
 sudo apt-get -y update
 sudo apt-get install -y haproxy
 sudo echo "ENABLED=1" >> /etc/default/haproxy
