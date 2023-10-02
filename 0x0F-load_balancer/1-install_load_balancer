@@ -11,16 +11,16 @@ backend webservers
     server 373719-web-01 100.25.33.169:80 check
     server 373719-web-02 3.83.18.68:80 check
 "
-# Update packages
+# Update
 apt-get -y update
 apt-get -y upgrade
 
-# Add HAProxy PPA
+# Add HAProx
 apt-get -y install software-properties-common
 add-apt-repository -y ppa:vbernat/haproxy-2.5
 apt-get -y update
 
-# Install HAProxy
+# Install HAP
 apt-get -y install haproxy
 cp -a /etc/haproxy/haproxy.cfg{,.orig}
 echo "$balancer" >> /etc/haproxy/haproxy.cfg
