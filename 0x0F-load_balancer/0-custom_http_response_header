@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Double the number of webservers
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+cd /var/www/ || return
+sudo chmod 777 html
+echo 'Hello World!' > html/index.html
+sudo chmod 755 html
+REDIRECT_CONFIG="\tlocation /redirect_me {\n\t\treturn 301 https://www.alxafrica.com;\n\t}"
+sudo sed -i "52 a \    $REDIRECT_CONFIG" /etc/nginx/sites-enabled/default
+cd /etc/nginx/
+sudo mkdir -p html
+sudo chmod 777 html
+echo "Ceci n'est pas une page" > html/404.html
+sudo chmod 755 html
+CUSTOM404PAGE_CONFIG="\terror_page 404 /404.html;\n\tlocation /404 {\n\t\troot /etc/nginx/html;\n\t\tinternal;\n\t}"
+sudo sed -i "55 a \    $CUSTOM404PAGE_CONFIG" /etc/nginx/sites-enabled/default
+CUSTOMHEADER_CONFIG="add_header X-Served-By \"$HOSTNAME\";"
+sudo sed -i "62 a \        $CUSTOMHEADER_CONFIG" /etc/nginx/nginx.conf
+sudo service nginx restart
