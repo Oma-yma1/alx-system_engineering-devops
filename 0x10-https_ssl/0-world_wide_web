@@ -1,31 +1,20 @@
 #!/usr/bin/env bash
-# display info
+# display information subdomain
 
-check_subdomain() {
-    SUB_DOMAIN=$1
-    dig_output=$(dig "$SUB_DOMAIN.$domain" +short)
-    RECORD_TYPE=$(dig "$SUB_DOMAIN.$domain" +short | awk 'NR==1{print $4}')
-
-    if [ -z "$dig_output" ]; then
-        DESTINATION="N/A"
-    else
-        DESTINATION="$dig_output"
-    fi
-
-    echo "The subdomain $SUB_DOMAIN is a A$RECORD_TYPE record and points to $DESTINATION"
+prin_sub ()
+{
+    printf "The subdomain %s is a " "$2"
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+    printf " record and points to "
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+    echo ""
 }
 
-# Main script
-domain="$1"
-subdomain="$2"
-
-if [ -z "$subdomain" ]; then
-    # Display information for default subdomains in the specified order
-    check_subdomain "www"
-    check_subdomain "lb-01"
-    check_subdomain "web-01"
-    check_subdomain "web-02"
+if [ -z "$2" ]; then
+   for subb in "www" "lb-01" "web-01" "web-02"
+   do
+       prin_sub "$1" "$subb"
+   done
 else
-    # Display information for the specified subdomain
-    check_subdomain "$subdomain"
+    prin_sub "$1" "$2"
 fi
