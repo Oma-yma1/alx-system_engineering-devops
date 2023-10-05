@@ -2,8 +2,8 @@
 # configure domain zone , display information domain
 
 func_domai() {
-    local domain="$1"
-    local subdomain="$2"
+    domain="$1"
+    subdomain="$2"
     
     # use default subdomains
     if [ -z "$subdomain" ]; then
@@ -12,16 +12,16 @@ func_domai() {
         subdomains=("$subdomain")
     fi
 
-    for sub in "${subdomains[@]}"; do
+    for SUB_DOMAIN in "${subdomains[@]}"; do
         # Use 'dig' to functio, domain information for the subdomain
-        result=$(dig "$sub.$domain" | awk '/ANSWER SECTION:/ {getline; print}')
+        result=$(dig "$SUB_DOMAIN.$domain" | awk '/ANSWER SECTION:/ {getline; print}')
         if [ -n "$result" ]; then
             # find the record type and destination from the dig result
-            record_type=$(echo "$result" | awk '{print $4}')
-            destination=$(echo "$result" | awk '{print $5}')
-            echo "The subdomain $sub is a $record_type record and points to $destination"
+            RECORD_TYPE=$(echo "$result" | awk '{print $4}')
+            DESTINATION=$(echo "$result" | awk '{print $5}')
+            echo "The subdomain $SUB_DOMAIN is a $RECORD_TYPE record and points to $DESTINATION"
         else
-            echo "No DNS record found for subdomain $sub"
+            echo "No DNS record found for subdomain $SUB_DOMAIN"
         fi
     done
 }
