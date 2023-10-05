@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
-# configure domain zone and display information about subdomain
+# configure domain zone and display info domains
 
-print_domain () {
-    answ=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    subdomain="$2"
-    record_typ=$(echo "$answ" | awk '{print $2}')
-    dest=$(echo "$answ" | awk '{print $3}')
-    echo "The subdomain $subdomain is a $record_typ record and points to $dest"
+domain_info ()
+{
+    printf "The subdomain %s is a " "$2"
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+    printf " record and points to "
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+    echo ""
 }
 
-if [ "$#" == 1 ]
-then
-  print_domain "$1" "www"
-  print_domain "$1" "lb-01"
-  print_domain "$1" "web-01"
-  print_domain "$1" "web-02"
-elif [ "$#" == 2 ]
-then
-  print_domain "$1" "$2"
+if [ -z "$2" ]; then
+   for sub in "www" "lb-01" "web-01" "web-02"
+   do
+       domain_info "$1" "$sub"
+   done
+else
+    domain_info "$1" "$2"
 fi
