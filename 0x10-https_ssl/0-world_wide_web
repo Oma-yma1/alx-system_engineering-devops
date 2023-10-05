@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
-# display info domain
+# display info subdomain
 
-print_domaine () {
-    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
+prin_sub ()
+{
+    printf "The subdomain %s is a " "$2"
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+    printf " record and points to "
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+    echo ""
 }
 
-if [ "$#" -eq 2 ]
-then
-    print_domaine "$2.$1" "$2"
+if [ -z "$2" ]; then
+   for sub in "www" "lb-01" "web-01" "web-02"
+   do
+       prin_sub "$1" "$sub"
+   done
 else
-    print_domaine "www.$1" "www"
-    print_domaine "lb-01.$1" "lb-01"
-    print_domaine "web-01.$1" "web-01"
-    print_domaine "web-02.$1" "web-02"
+    prin_sub "$1" "$2"
 fi
