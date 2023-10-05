@@ -3,19 +3,18 @@
 
 prin_sub ()
 {
-    local domain="$1"
     printf "The subdomain %s is a " "$2"
-    dig "$2.$domain" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
     printf "A record and points to "
-    dig "$2.$domain" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+    dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
     echo ""
 }
 
 if [ -z "$2" ]; then
    for sub in "www" "lb-01" "web-01" "web-02"
    do
-       prin_sub "$domain" "$sub"
+       prin_sub "$1" "$sub"
    done
 else
-    prin_sub "$domain" "$2"
+    prin_sub "$1" "$2"
 fi
