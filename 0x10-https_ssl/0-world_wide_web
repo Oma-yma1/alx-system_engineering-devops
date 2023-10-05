@@ -1,41 +1,16 @@
 #!/usr/bin/env bash
-# configure domain zone , display information domain
+# display info domain
 
-func_domai() {
-    domain="$1"
-    subdomain="$2"
-    
-    # use default subdomains
-    if [ -z "$subdomain" ]; then
-        subdomains=("www" "lb-01" "web-01" "web-02")
-    else
-        subdomains=("$subdomain")
-    fi
-
-    for SUB_DOMAIN in "${subdomains[@]}"; do
-        # Use 'dig' to functio, domain information for the subdomain
-        result=$(dig "$SUB_DOMAIN.$domain" | awk '/ANSWER SECTION:/ {getline; print}')
-        if [ -n "$result" ]; then
-            # find the record type and destination from the dig result
-            RECORD_TYPE=$(echo "$result" | awk '{print $4}')
-            DESTINATION=$(echo "$result" | awk '{print $5}')
-            echo "The subdomain $SUB_DOMAIN is a $RECORD_TYPE record and points to $DESTINATION"
-        else
-            echo "No DNS record found for subdomain $SUB_DOMAIN"
-        fi
-    done
+print_domaine () {
+    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
 
-# Chec script is called with the correct number of args
-if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 <domain> [subdomain]"
-    exit 1
+if [ "$#" -eq 2 ]
+then
+    print_domaine "$2.$1" "$2"
+else
+    print_domaine "www.$1" "www"
+    print_domaine "lb-01.$1" "lb-01"
+    print_domaine "web-01.$1" "web-01"
+    print_domaine "web-02.$1" "web-02"
 fi
-
-# domain and subdomain arguments
-domain="$1"
-subdomain="$2"
-
-# Call thefunc_domai function with the provided arguments
-func_domai "$domain" "$subdomain"
-
