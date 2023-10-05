@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # display information subdomain
-
 prin_sub ()
 {
     printf "The subdomain %s is a " "$2"
