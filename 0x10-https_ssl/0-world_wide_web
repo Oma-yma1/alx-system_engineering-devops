@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # display information subdomain
+
 prin_sub ()
 {
     printf "The subdomain %s is a " "$2"
@@ -8,6 +9,7 @@ prin_sub ()
     dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
     echo ""
 }
+
 if [ -z "$2" ]; then
    for subb in "www" "lb-01" "web-01" "web-02"
    do
