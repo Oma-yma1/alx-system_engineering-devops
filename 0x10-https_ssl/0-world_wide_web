@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# configure domain zone and display information about subdomains
+# configure domain zone and display information about subdomain
 
 print_domain () {
     answ=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    echo "$2 $answ" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+    subdomain="$2"
+    record_typ=$(echo "$answ" | awk '{print $2}')
+    dest=$(echo "$answ" | awk '{print $3}')
+    echo "The subdomain $subdomain is a $record_typ record and points to $dest"
 }
 
 if [ "$#" == 1 ]
