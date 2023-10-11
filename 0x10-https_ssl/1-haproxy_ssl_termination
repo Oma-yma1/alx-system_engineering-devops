@@ -48,5 +48,5 @@ frontend  hamom.tech-https-frontend
 
 backend hamom.tech-backend
         balance roundrobin
-        server 373719-web-01 100.25.33.169:80 check
-        server 373719-web-02 3.83.18.68:80 check
+        server 373719-web-01 34.232.76.67 check
+        server 373719-web-02 54.224.49.219 check
