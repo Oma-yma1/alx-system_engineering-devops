@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Run Nginx as Nginx user
+sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
+service nginx restart
+if pgrep nginx > /dev/null; then
+  if nc -z 0 8080; then
+    exit 0
+  else
+    exit 1
+  fi
+else
+  exit 1
+fi
