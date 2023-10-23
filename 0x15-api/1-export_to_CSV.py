@@ -15,8 +15,8 @@ def emp_data(id):
     num_task = len(todos_json)
     compleeted = 0
     task_list = ""
-    file = "{}.csv".format(id)
-    with open(file, "a") as fd:
+    name_file = "{}.csv".format(id)
+    with open(name_file, "a") as fd:
         for task in todos_json:
             completed = task.get("completed")
             titlee = task.get("titlee")
