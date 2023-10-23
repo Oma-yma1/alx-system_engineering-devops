@@ -2,28 +2,28 @@
 """script to export data in the CSV format"""
 import requests
 import sys
+import csv
 
 
 def emp_data(id):
     url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
     resp = requests.get(url)
     resp_json = resp.json()
-    name = resp_json["name"]
+    user_id = resp_json.get("id")
+    username = resp_json.get("username")
     url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
     todos = requests.get(url)
     todos_json = todos.json()
-    num_task = len(todos_json)
-    compleeted = 0
-    task_list = ""
-    name_file = "{}.csv".format(id)
-    with open(name_file, "a") as fd:
+    csv_fname = "{}.csv".format(user_id)
+    with open(csv_fname, mode='w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+        csv_writer.writerow(["USER_ID", "USERNAME",
+                             "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         for task in todos_json:
-            completed = task.get("completed")
-            titlee = task.get("titlee")
-            csv = "\"{}\",\"{}\",\"{}\",\"{}\"\n".format(id, name,
-                                                         completed, titlee)
-            fd.write(csv)
+            completed = "True" if task.get("completed") else "False"
+            task_title = task.get("title")
+            csv_writer.writerow([user_id, username, completed, task_title])
 
 
-if __name__ == "__main__":
+if __name__ == "__main":
     emp_data(sys.argv[1])
