@@ -13,14 +13,14 @@ def emp_data(id):
     todos = requests.get(url)
     todos_json = todos.json()
     num_task = len(todos_json)
-    compleated = 0
+    compleeted = 0
     list = ""
     for task in todos_json:
         if task.get("completed") is True:
-            compleated += 1
+            compleeted += 1
             list += "\t " + task.get("title") + "\n"
     print("Employee {} is done with tasks({}/{}):".format(name,
-                                                          compleated,
+                                                          compleeted,
                                                           num_task))
     print(list[:-1])
 
