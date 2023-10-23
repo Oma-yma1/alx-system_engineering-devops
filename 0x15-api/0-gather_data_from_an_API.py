@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""""""
+"""returns information about TODO list progress for emp id"""
 import requests
 import sys
 
