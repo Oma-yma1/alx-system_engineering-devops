@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" return list containing the titles of all hot articles for given subreddit """
+"""return list containing the titles of all articles for given subreddit"""
 import requests
 
 
