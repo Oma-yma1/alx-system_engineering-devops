@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""parses the title of all hot articles and prints keywords"""
+"""Function to count words in all hot posts of given Reddit subreddit"""
 import requests
 
 
 def count_words(subreddit, word_list, instances={}, after="", count=0):
-    """function count words"""
+    """Prints counts of given words found in hot posts"""
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
         "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
