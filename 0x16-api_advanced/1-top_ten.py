@@ -4,7 +4,7 @@ import requests
 
 
 def top_ten(subreddit):
-    """ function top ten"""
+    """ function top ten subreddit"""
     url = ("https://api.reddit.com/r/{}?sort=hot&limit=10".format(subreddit))
     headers = {'User-Agent': 'CustomClient/1.0'}
     response = requests.get(url, headers=headers, allow_redirects=False)
